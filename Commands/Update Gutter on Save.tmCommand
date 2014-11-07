@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/local/var/rbenv/versions/2.1.4/bin/ruby
+Dir.chdir(ENV['TM_PROJECT_DIRECTORY'] || ENV['TM_DIRECTORY'])
+
+mark  = "#{ENV['TM_BUNDLE_SUPPORT']}/changed.pdf"
+args  = [ "--clear-mark=#{mark}" ]
+regex = /^[^:]+\:(?&lt;line&gt;[0-9]+)\:(?&lt;col&gt;[0-9]+)\: (?&lt;category&gt;[A-Z])\: (?&lt;error&gt;.+)$/
+messages = []
+
+results = `/usr/local/var/rbenv/versions/2.1.4/bin/rubocop $TM_FILEPATH`
+
+errors = results.scan(regex)
+
+unless errors.empty?
+  args &lt;&lt; "--set-mark=#{mark}"
+
+  errors.each do |error|
+    args &lt;&lt; "--line=#{error[0]}"
+    messages &lt;&lt; "#{error[0]}: #{error[3]}"
+  end
+
+  args &lt;&lt; ENV['TM_FILEPATH']
+end
+
+system(ENV['TM_MATE'], *args)
+puts messages.join("\n")</string>
+	<key>hideFromUser</key>
+	<true/>
+	<key>input</key>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>name</key>
+	<string>Update Gutter on Save</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>toolTip</string>
+	<key>scope</key>
+	<string>source.ruby</string>
+	<key>semanticClass</key>
+	<string>callback.document.did-save</string>
+	<key>uuid</key>
+	<string>081613BD-FBAF-4339-87AC-ED8FE942C525</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,10 @@
+{	"contactEmailRot13" = "ohaqyrf@grkgzngr.bet";
+	contactName = "Dirk Sierd de Vries";
+	description = "Show indication in gutter for rubocop";
+	name = "Rubocop";
+	source = {
+		method = "git";
+		url = "git@github.com:dirksierd/rubocop-gutter.tmbundle";
+	};
+	uuid = "7A84ECFC-2683-4129-826D-51F05F7E668A";
+}
