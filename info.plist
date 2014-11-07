@@ -6,5 +6,5 @@
 		method = "git";
 		url = "git@github.com:dirksierd/rubocop-gutter.tmbundle";
 	};
-	uuid = "7A84ECFC-2683-4129-826D-51F05F7E668A";
+	uuid = "B9E025E7-46D9-4C58-A3DC-F0D4BB254DA0";
 }
